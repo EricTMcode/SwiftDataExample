@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddExpenseView: View {
+    @Environment(\.modelContext) var context
     @Environment(\.dismiss) var dismiss
     
     @State private var name: String = ""
@@ -31,7 +32,9 @@ struct AddExpenseView: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Save") {
-                        
+                        let expense = Expense(name: name, date: date, value: value)
+                        context.insert(expense)
+                        dismiss()
                     }
                 }
             }
